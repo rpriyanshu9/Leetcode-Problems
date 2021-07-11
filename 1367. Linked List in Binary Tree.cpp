@@ -35,6 +35,8 @@ public:
             return true;
         if (root == NULL)
             return false;
-        return head->val == root->val && (dfs(head->next, root->left) || dfs(head->next, root->right));
+        if (head->val == root->val)
+            return (dfs(head->next, root->left) || dfs(head->next, root->right));
+        return false;
     }
 };
