@@ -3,25 +3,18 @@ class Solution
 public:
     string customSortString(string order, string str)
     {
+        unordered_map<char, int> mp;
         string res = "";
-        bool visit[200] = {false};
-        for (int i = 0; i < order.length(); i++)
+        for (auto i : str)
+            mp[i]++;
+        for (auto i : order)
         {
-            for (int j = 0; j < str.length(); j++)
-            {
-                if (str[j] == order[i])
-                {
-                    res += str[j];
-                    visit[j] = true;
-                }
-            }
+            res += string(mp[i], i);
+            mp.erase(i);
         }
-        for (int j = 0; j < str.length(); j++)
+        for (auto i : mp)
         {
-            if (visit[j] == false)
-            {
-                res += str[j];
-            }
+            res += string(i.second, i.first);
         }
         return res;
     }
