@@ -48,8 +48,33 @@ public:
 
         //DFS
         //Verdict: 527 / 527 test cases passed, but took too long.
-        res = 1;
-        helper(1, n);
-        return res;
+        // res = 1;
+        // helper(1, n);
+        // return res;
+
+        //Optimal
+        int fib[32];
+        fib[0] = 1;
+        fib[1] = 2;
+        for (int i = 2; i < 32; i++)
+            fib[i] = fib[i - 1] + fib[i - 2];
+        int pre_bit = 0, ans = 0;
+        for (int bit = 31; bit >= 0; --bit)
+        {
+            if ((1 << bit) & n)
+            {
+                ans += fib[bit];
+                if (pre_bit == 1)
+                {
+                    return ans;
+                }
+                pre_bit = 1;
+            }
+            else
+            {
+                pre_bit = 0;
+            }
+        }
+        return ans + 1;
     }
 };
